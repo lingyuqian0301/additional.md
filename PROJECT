@@ -1,0 +1,165 @@
+#include <iostream>
+using namespace std;
+
+string modelChoice(double&);
+string variantsChoice(double&);
+string regionChoice(double&);
+string paintChoice(double&);
+void displayCarInfo(string, string, string, string);
+void calculateMonthlyInstallment(double);
+
+int main()
+{
+    double priceTotal, modelprice, paintprice, regionprice, variantprice;
+    displayCarInfo(paintChoice(paintprice), regionChoice(regionprice), variantsChoice(variantprice), modelChoice(modelprice) );
+    priceTotal=modelprice+ paintprice+ regionprice+ variantprice;
+    cout<<endl<<"Price (MYR): "<<priceTotal;
+    calculateMonthlyInstallment(priceTotal);
+    return 0;
+}
+
+string modelChoice(double &price){
+    char choice;
+    string c1;
+    while(true){
+        cout << endl<<"Model [1-X50, 2-Exora, 3-Persona]: ";
+        cin >> choice;
+	    switch (choice){
+            case '1':
+                c1="X50";
+                price=60000.00;
+                break;
+	        case '2':
+	            c1="Exora";
+	            price=55000.00;
+	            break;
+	        case '3':
+	            c1="Persona";
+	            price=45000.00;
+	            break;
+	        default:
+	            cout<<"Invalid input, please enter again.";
+	            continue;
+	    }
+	    break;
+    };
+	return c1;
+}
+
+string variantsChoice(double &price){
+    char choice;
+    string c2;
+    while(true){
+        cout << endl<<"Variants [1-1.6L Standard CVT, 2-1.6L Premium CVT]: ";
+        cin >> choice;
+        switch (choice){
+	        case '1':
+	            c2="1.6L Standard CVT";
+	            price=00.00;
+	            break;
+	        case '2':
+	            c2="1.6L Premium CVT";
+	            price=5000.00;
+	            break;
+	        default:
+	            cout<<"Invalid input, please enter again.";
+	            continue;
+        }
+        break;
+    };
+    return c2;
+}
+
+string regionChoice(double &price){
+    char choice;
+    string c3;
+    while(true){
+        cout <<endl<< "Region [1-Penisular Malaysia, 2-East Malaysia]: ";
+        cin >> choice;
+        switch (choice){
+	        case '1':
+	            c3="Penisular Malaysia";
+	            price=500.00;
+	            break;
+	        case '2':
+	            c3="East Malaysia";
+	            price=2000.00;
+	            break;
+	        default:
+	            cout<<"Invalid input, please enter again.";
+	            continue;
+        }
+	    break;
+    };
+    return c3;
+}
+
+string paintChoice(double &price){
+    char choice;
+    string c4;
+    while(true){
+        cout <<endl<< "Paint [1-Metalic, 2-Pearl White, 3-Solid Black]: ";
+        cin >> choice;
+        switch (choice){
+		    case '1':
+	            c4="Metalic";
+	            price=300.00;
+	            break;
+	        case '2':
+	            c4="Pearl White";
+	            price=500.00;
+	            break;
+	        case '3':
+	            c4="Solid Black";
+	            price=200.00;
+	            break;
+	        default:
+	            cout<<"Invalid input, please enter again.";
+	            continue;
+        }
+        break;
+    };
+    return c4;
+}
+
+void displayCarInfo(string paintchoice, string regionchoice, string variantchoice, string modelchoice){
+    cout <<endl<< "Car info ";
+    cout <<endl<< "Model: "<<modelchoice;
+    cout <<endl<< "Variant: "<<variantchoice;
+    cout <<endl<< "Region: "<<regionchoice;
+    cout <<endl<< "Paint Type: "<<paintchoice;
+}
+
+void calculateMonthlyInstallment (double priceTotal){
+    double totalPriceAfterDownPayment=priceTotal-(priceTotal/10), interest, monthlyInstallment;
+    char choice;
+    cout <<endl<<endl<< "Down Payment (MYR): "<<priceTotal/10<<" (10% of the car price)";
+    
+    while(true){
+        cout <<endl<< "Repayment Period (in years) [5, 7, 9]: ";
+        cin >> choice;
+        switch (choice){
+		    case '5':
+	            interest=3.8;
+	            monthlyInstallment=((totalPriceAfterDownPayment*3.8*5/100)+totalPriceAfterDownPayment)/60;
+	            break;
+	        case '7':
+	            interest=3.6;
+	            monthlyInstallment=((totalPriceAfterDownPayment*3.6*7/100)+totalPriceAfterDownPayment)/84;
+	            break;
+	        case '9':
+	            interest=3.4;
+	            monthlyInstallment=((totalPriceAfterDownPayment*3.4*9/100)+totalPriceAfterDownPayment)/108;
+	            break;
+	        default:
+	            cout<<"Invalid input, please enter again.";
+	            continue;
+        }
+        break;
+    };
+    
+    cout <<endl<< "Interest Rate (%): "<<interest;
+    cout <<endl<< "Total Installment for "<<choice<< " years ("<<int(choice - '0')*12<<"): "<<monthlyInstallment*int(choice - '0')*12;
+    cout <<endl<<endl<< "********Your monthly installment is (MYR): "<<monthlyInstallment<<"(per month)********";
+}
+
