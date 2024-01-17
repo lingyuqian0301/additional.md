@@ -1,0 +1,50 @@
+
+#include <iostream>
+#include<iomanip>
+using namespace std;
+/*
+Write a program that convert kilograms to pounds or pound to kilograms.
+the user need to select the unit for conversion; either kg/KG for kilogram or l/L for pound.
+Afterwards, the user need to key in the amount for kg to l or l to kg conversion.
+Using a user-defined function to ensure that use key in the valid amount for conversion.
+the defined function should return a bool value and accept a string.
+*/
+bool valid(string choice){
+    if(choice=="kg"||choice=="KG"||choice=="l"||choice=="L"){
+        return true;
+    }else{
+        return false;
+    }
+   
+}
+int main(){
+    string choice;
+    double result=0.0;
+    double value=0.0;
+    int afterchoice;
+    cout<<"kg/KG- conversion kilograms to pounds\n-l/L conversion pound to kilograms\n";
+   
+    while(true){
+        cout<<"Choice: ";
+        cin>> choice;
+        afterchoice=valid(choice);
+        if(afterchoice==false){
+            cout<<"Invalid choice.Please try again.\n";
+        }else{
+            break;
+        }
+    }
+    cout<<"Enter value: ";
+    cin>>value;
+    if(choice=="kg"||choice=="KG"){
+        result=value*2.20462262185;
+        cout<<fixed<<setprecision(2)<<"Result: "<<result;
+    }else if(choice=="l"||choice=="L"){
+        result=value*0.453592;
+        cout<<fixed<<setprecision(2)<<"Result: "<<result;
+    }else{
+        cout<<"Invalid input.Please try again.\n";
+    }
+
+    return 0;
+}
